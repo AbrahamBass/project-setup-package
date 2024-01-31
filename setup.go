@@ -92,23 +92,23 @@ func main() {
 	}
 	defer file.Close()
 
-	// serverDir := filepath.Join(projectDir, "server")
-	// if err := os.MkdirAll(serverDir, os.ModePerm); err != nil {
-	// 	fmt.Println("Error al crear la subcarpeta:", err)
-	// 	os.Exit(1)
-	// }
+	serverDir := filepath.Join(projectDir, "server")
+	if err := os.MkdirAll(serverDir, os.ModePerm); err != nil {
+		fmt.Println("Error al crear la subcarpeta:", err)
+		os.Exit(1)
+	}
 
-	// serverContent, err := content.ReadFile("packages/server.txt")
-	// if err != nil {
-	// 	fmt.Println("Error al leer el archivo:", err)
-	// 	os.Exit(1)
-	// }
+	serverContent, err := content.ReadFile("packages/server.txt")
+	if err != nil {
+		fmt.Println("Error al leer el archivo:", err)
+		os.Exit(1)
+	}
 
-	// serverPath := filepath.Join(serverDir, "server.go")
-	// if err := writeToFile(serverPath, string(serverContent)); err != nil {
-	// 	fmt.Println("Error al escribir en el archivo:", err)
-	// 	os.Exit(1)
-	// }
+	serverPath := filepath.Join(serverDir, "server.go")
+	if err := writeToFile(serverPath, string(serverContent)); err != nil {
+		fmt.Println("Error al escribir en el archivo:", err)
+		os.Exit(1)
+	}
 
 	repositoryDir := filepath.Join(projectDir, "repository")
 	if err := os.MkdirAll(repositoryDir, os.ModePerm); err != nil {
