@@ -142,16 +142,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	cmd := exec.Command("go", "mod", "init", fmt.Sprintf("github.com/%v", strings.TrimSpace(name)))
-	cmd.Dir = projectDir
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		fmt.Println("Error al ejecutar go mod init:", err)
-		os.Exit(1)
-	}
+	// cmd := exec.Command("go", "mod", "init", fmt.Sprintf("github.com/%v", strings.TrimSpace(name)))
+	// cmd.Dir = projectDir
+	// cmd.Stdout = os.Stdout
+	// cmd.Stderr = os.Stderr
+	// if err := cmd.Run(); err != nil {
+	// 	fmt.Println("Error al ejecutar go mod init:", err)
+	// 	os.Exit(1)
+	// }
 
-	cmd = exec.Command("go", "get", "github.com/gorilla/mux", "github.com/joho/godotenv", "github.com/lib/pq", "github.com/rs/cors")
+	cmd := exec.Command("go", "get", "github.com/gorilla/mux", "github.com/joho/godotenv", "github.com/lib/pq", "github.com/rs/cors")
 	cmd.Dir = projectDir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
