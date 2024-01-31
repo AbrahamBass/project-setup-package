@@ -98,7 +98,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	serverContent, err := os.ReadFile("packages/server.txt")
+	serverContent, err := content.ReadFile("packages/server.txt")
 	if err != nil {
 		fmt.Println("Error al leer el archivo:", err)
 		os.Exit(1)
