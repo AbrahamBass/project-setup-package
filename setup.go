@@ -2,12 +2,16 @@ package main
 
 import (
 	"bufio"
+	"embed"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 )
+
+//go:embed packages/*
+var content embed.FS
 
 func main() {
 
@@ -56,7 +60,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	mainContent, err := os.ReadFile("packages/main.txt")
+	mainContent, err := content.ReadFile("packages/main.txt")
 	if err != nil {
 		fmt.Println("Error al leer el archivo:", err)
 		os.Exit(1)
@@ -68,7 +72,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	envContent, err := os.ReadFile("packages/env.txt")
+	envContent, err := content.ReadFile("packages/env.txt")
 	if err != nil {
 		fmt.Println("Error al leer el archivo:", err)
 		os.Exit(1)
@@ -112,7 +116,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	repositoryContent, err := os.ReadFile("packages/repository.txt")
+	repositoryContent, err := content.ReadFile("packages/repository.txt")
 	if err != nil {
 		fmt.Println("Error al leer el archivo:", err)
 		os.Exit(1)
@@ -130,7 +134,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	databaseContent, err := os.ReadFile("packages/database.txt")
+	databaseContent, err := content.ReadFile("packages/database.txt")
 	if err != nil {
 		fmt.Println("Error al leer el archivo:", err)
 		os.Exit(1)
@@ -142,16 +146,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	// cmd := exec.Command("go", "mod", "init", fmt.Sprintf("github.com/%v", strings.TrimSpace(name)))
-	// cmd.Dir = projectDir
-	// cmd.Stdout = os.Stdout
-	// cmd.Stderr = os.Stderr
-	// if err := cmd.Run(); err != nil {
-	// 	fmt.Println("Error al ejecutar go mod init:", err)
-	// 	os.Exit(1)
-	// }
+	cmd := exec.Command("go", "mod", "init", fmt.Sprintf("github.com/%v", strings.TrimSpace(name)))
+	cmd.Dir = projectDir
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Println("Error al ejecutar go mod init:", err)
+		os.Exit(1)
+	}
 
-	cmd := exec.Command("go", "get", "github.com/gorilla/mux", "github.com/joho/godotenv", "github.com/lib/pq", "github.com/rs/cors")
+	cmd = exec.Command("go", "get", "github.com/gorilla/mux", "github.com/joho/godotenv", "github.com/lib/pq", "github.com/rs/cors")
 	cmd.Dir = projectDir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
