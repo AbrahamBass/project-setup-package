@@ -19,7 +19,7 @@ func main() {
 
 	currentDir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("Error al obtener la ruta del directorio actual:", err)
+		fmt.Println("Error al obtener la ruta del directorio actual: ", err)
 		return
 	}
 
